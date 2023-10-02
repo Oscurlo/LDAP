@@ -29,10 +29,9 @@ class LDAP
         # format filter
         $base = "dc=" . getenv("USERDOMAIN") . ",dc=COM";
         $attributes = $attributes;
-        define("FILTER", $search);
 
-        $filter = "(|" . implode("", array_map(function ($x) {
-            return "({$x}=" . FILTER . ")";
+        $filter = "(|" . implode("", array_map(function ($x) use ($search) {
+            return "({$x}={$search})";
         }, $attributes)) . ")";
 
         # set_option
